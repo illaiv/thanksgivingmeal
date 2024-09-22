@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1 class = "greeting"></h1>
+
+
+    <p class="fullMeal"></p>
+
+
+    <p class="priceInfo"></p>
+
+
+    <p class = "calorieInfo"></p>
+
+
+
+    <script>
+         const thanksgivingMeal = {
+    starter : { 
+        fruit: "honeydew melon",
+        wine: "moscato",
+        calories: 180
+    },
+    entree : {
+        meat: "Turkey",
+        alt: "Stuffed green peppers",
+        vegetables : {
+            potatoes: "Creamed mashed potatoes",
+            greens: "French beans",
+            salad: "Radacchio"
+            },
+        sides : {
+            bread: "garlic bread rolls",
+            pasta: "Macaroni and Cheese"
+            },
+        calories: 450
+        },
+    dessert : {
+        ice_cream: "pumpkin-vanilla",
+        cake: "frosted pumpkin pie",
+        calories: 300
+    },
+    total_cost : 25.0,
+    senior_discount: .10,
+    prettyPrint : function(){
+        // Collate the menu here
+       // display the content of the starter, the entree and the dessert
+          let menuStr = `For the starter we have: ${thanksgivingMeal.starter.fruit}, ${thanksgivingMeal.starter.wine}. For the entree we have: ${thanksgivingMeal.entree.meat} or ${thanksgivingMeal.entree.alt}. We also have these vegetables: ${thanksgivingMeal.entree.vegetables.potatoes}, ${thanksgivingMeal.entree.vegetables.greens}, ${thanksgivingMeal.entree.vegetables.salad}. We also have these side options: ${thanksgivingMeal.entree.sides.bread} or ${thanksgivingMeal.entree.sides.pasta}. For dessert we have: ${thanksgivingMeal.dessert.cake}, ${thanksgivingMeal.dessert.ice_cream}`
+       return menuStr;
+    },
+    totalPrice: function(isSenior) {
+        let price = thanksgivingMeal.total_cost;
+        if (isSenior){
+            price *= (1  - thanksgivingMeal.senior_discount);
+        }
+        return price;
+    },
+    totalCalories : function() {
+        // Add the total calories
+return thanksgivingMeal.starter.calories + thanksgivingMeal.entree.calories + thanksgivingMeal.dessert.calories;
+      },
+
+    caloriesFrom: function(indicator) {
+        if (indicator === 1) {
+            return thanksgivingMeal.starter.calories;
+        } else if (indicator === 2) {
+            return thanksgivingMeal.entree.calories;
+        } else if (indicator === 3) {
+            return thanksgivingMeal.dessert.calories;
+        }
+        return 0;
+    } 
+};
+document.querySelector(".greeting").innerHTML = `Enjoy Your Thanksgiving This Year!!`;
+document.querySelector(".fullMeal").innerHTML = thanksgivingMeal.prettyPrint();
+document.querySelector(".priceInfo").innerHTML = `The total cost for the feast will be: $${thanksgivingMeal.totalPrice(false)} seniors get a 10% discount which results in the price being $22.50`;
+document.querySelector(".calorieInfo").innerHTML = `The total damage for your calories will be: ${thanksgivingMeal.totalCalories()}.`;
+    </script>
+</body>
+</html>
